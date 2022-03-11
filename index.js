@@ -3,9 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from 'cors';
 import router from './routes/oil.js';
-require('dotenv').config();
-
-
+import 'dotenv/config'
 
 const app = express();
 app.use(express.json());
