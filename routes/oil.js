@@ -1,5 +1,5 @@
 import express  from "express";
-import { getOil } from "../controllers/oilController.js";
+import { getOil,deleteOil } from "../controllers/oilController.js";
 // import  OilModule from "../models/oilModel.js";
 import OilModule from "../models/oilModel.js";
 
