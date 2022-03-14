@@ -1,7 +1,7 @@
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
 import BrandModule from "../models/brandModules.js";
-
+import OilGradeModule from "../models/oilGradeModule.js";
 
 export const getOil= async (req,res)=>{
     try {
@@ -27,28 +27,24 @@ export const getBrand= async (req,res)=>{
         res.status(404).json({ message: error.message})
     }
 }
-export const createOil =async (req,res)=>{
-    // res.send('Router is working');
-    const oil= req.body;
-
-    const newOil = new OilModule(oil);
+export const getOilGrade= async (req,res)=>{
     try {
-       await newOil.save();
-       res.status(201).json(newOil);
+        const allOilGrade=await OilGradeModule.find();
+        res.status(200).json(allOilGrade);
     } catch (error) {
-        res.status(409).json({message : error.message});
+        res.status(404).json({ message: error.message})
     }
 }
 
 export const deleteOilUsge =async (req,res)=>{
-    OilUsegModule.findByIdAndRemove(req.params.id, function(err){
-        if(err){
-            console.log('hi')
-            res.redirect("done");
-        } else {
-            res.redirect("try again");
-        }
-     });
+     const id = req.params.id;
+
+   try {
+        await OilUsegModule.findByIdAndRemove(id).exec();
+        res.send('done')
+   } catch (error) {
+       console.log(error)
+   }
 }
 
 export const deleteOil =async (req,res)=>{
@@ -66,6 +62,16 @@ export const deleteBrand =async (req,res)=>{
  
     try {
          await BrandModule.findByIdAndRemove(id).exec();
+         res.send('done')
+    } catch (error) {
+        console.log(error)
+    }
+ }
+ export const deleteOilGrade=async (req,res)=>{
+    const id = req.params.id;
+ 
+    try {
+         await OilGradeModule.findByIdAndRemove(id).exec();
          res.send('done')
     } catch (error) {
         console.log(error)

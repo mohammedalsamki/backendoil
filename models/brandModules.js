@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-const oilUsegSchema = mongoose.Schema({
+const brandSchema = mongoose.Schema({
     
     BrandAr:String,
     BrandEn:String,
 
 })
-const BrandModule =mongoose.model('Brand',oilUsegSchema);
+const BrandModule =mongoose.model('Brand',brandSchema);
 
 export default BrandModule;
