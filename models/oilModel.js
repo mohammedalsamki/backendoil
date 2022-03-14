@@ -14,4 +14,3 @@ const oilSchema = mongoose.Schema({
 
 const OilModule =mongoose.model('oil',oilSchema);
 export default OilModule;
-// module.exports = {OilModule}
