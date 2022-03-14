@@ -3,6 +3,17 @@ import OilUsegModule from "../models/oilUsgeModule.js";
 import BrandModule from "../models/brandModules.js";
 import OilGradeModule from "../models/oilGradeModule.js";
 import CapacityModule from "../models/capacityModules.js";
+import UnitModule from "../models/unitModule.js";
+
+
+export const getUnit= async (req,res)=>{
+    try {
+        const allUnit=await UnitModule.find();
+        res.status(200).json(allUnit);
+    } catch (error) {
+        res.status(404).json({ message: error.message})
+    }
+}
 
 export const getOil= async (req,res)=>{
     try {
@@ -97,4 +108,14 @@ export const deleteBrand =async (req,res)=>{
     }
  }
 
+ export const deleteUnit=async (req,res)=>{
+    const id = req.params.id;
+ 
+    try {
+         await UnitModule.findByIdAndRemove(id).exec();
+         res.send('done')
+    } catch (error) {
+        console.log(error)
+    }
+ }
 
