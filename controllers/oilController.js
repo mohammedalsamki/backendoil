@@ -43,14 +43,14 @@ export const deleteOilUsge =async (req,res)=>{
 }
 
 export const deleteOil =async (req,res)=>{
-    OilModule.findByIdAndRemove(req.params.id, function(err){
-        if(err){
-            console.log('hi')
-            res.redirect("/campgrounds");
-        } else {
-            res.redirect("/campgrounds");
-        }
-     });
+   const id = req.params.id;
+
+   try {
+        await OilModule.findByIdAndRemove(id).exec();
+        res.send('done')
+   } catch (error) {
+       console.log(error)
+   }
 }
 
 

@@ -11,8 +11,6 @@ router.get('/oilUseg',getOilUsge);
 router.post("/",async (req,res)=>{
     const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}=req.body
     console.log(req.body)
-router.delete('/:id',deleteOil);
-
     let oildata =  new OilModule({
         OilUsage:OilUsage,
         Brand:Brand,
@@ -29,7 +27,6 @@ router.delete('/:id',deleteOil);
 router.post("/oilUseg",async (req,res)=>{
     const {OilUsageAr,OilUsageEn}=req.body
     console.log(req.body)
-router.delete('/oilUseg:id',deleteOilUsge);
 
     let oilUsgedata =  new OilUsegModule({
         OilUsageAr:OilUsageAr,
@@ -39,6 +36,9 @@ router.delete('/oilUseg:id',deleteOilUsge);
     oilUsgedata.save()
      res.send(oilUsgedata)
 })
+router.delete('/:id',deleteOil);
+router.delete('/oilUseg/:id',deleteOilUsge);
+
 
 
 export default router;
