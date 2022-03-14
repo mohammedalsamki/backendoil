@@ -29,7 +29,7 @@ router.delete('/:id',deleteOil);
 router.post("/oilUseg",async (req,res)=>{
     const {OilUsageAr,OilUsageEn}=req.body
     console.log(req.body)
-router.delete('/:id',deleteOilUsge);
+router.delete('/oilUseg:id',deleteOilUsge);
 
     let oilUsgedata =  new OilUsegModule({
         OilUsageAr:OilUsageAr,
