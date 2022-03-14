@@ -1,9 +1,10 @@
 import express  from "express";
-import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getOilGrade,deleteOilGrade } from "../controllers/oilController.js";
+import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getOilGrade,deleteOilGrade,getCapacity,deleteCapacity } from "../controllers/oilController.js";
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
 import BrandModule from "../models/brandModules.js";
 import OilGradeModule from "../models/oilGradeModule.js";
+import CapacityModule from "../models/capacityModules.js";
 
 const router = express.Router();
 
@@ -11,6 +12,8 @@ router.get('/',getOil);
 router.get('/oilUseg',getOilUsge);
 router.get('/brand',getBrand);
 router.get('/oilGrade',getOilGrade);
+router.get('/capacity',getCapacity);
+
 
 
 
@@ -66,10 +69,24 @@ router.post("/oilGrade",async (req,res)=>{
     oilGradedata.save()
      res.send(oilGradedata)
 })
+router.post("/capacity",async (req,res)=>{
+    const {capacityName,capacityNumber}=req.body
+    console.log(req.body)
+
+    let oilcapacity =  new CapacityModule({
+        capacityName:capacityName,
+        capacityNumber:capacityNumber
+    })
+    console.log(oilcapacity)
+    oilcapacity.save()
+     res.send(oilcapacity)
+})
 router.delete('/:id',deleteOil);
 router.delete('/oilUseg/:id',deleteOilUsge);
 router.delete('/brand/:id',deleteBrand);
 router.delete('/oilGrade/:id',deleteOilGrade);
+router.delete('/capacity/:id',deleteCapacity);
+
 
 
 
