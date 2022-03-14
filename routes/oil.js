@@ -1,12 +1,15 @@
 import express  from "express";
-import { getOil,deleteOil,getOilUsge,deleteOilUsge } from "../controllers/oilController.js";
+import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand } from "../controllers/oilController.js";
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
+import BrandModule from "../models/brandModules.js";
 
 const router = express.Router();
 
 router.get('/',getOil);
 router.get('/oilUseg',getOilUsge);
+router.get('/brand',getBrand);
+
 
 router.post("/",async (req,res)=>{
     const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}=req.body
@@ -36,8 +39,22 @@ router.post("/oilUseg",async (req,res)=>{
     oilUsgedata.save()
      res.send(oilUsgedata)
 })
+router.post("/brand",async (req,res)=>{
+    const {BrandAr,BrandEn}=req.body
+    console.log(req.body)
+
+    let branddata =  new BrandModule({
+        BrandAr:BrandAr,
+        BrandEn:BrandEn
+    })
+    console.log(branddata)
+    branddata.save()
+     res.send(branddata)
+})
 router.delete('/:id',deleteOil);
 router.delete('/oilUseg/:id',deleteOilUsge);
+router.delete('/brand/:id',deleteBrand);
+
 
 
 

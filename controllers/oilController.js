@@ -1,5 +1,6 @@
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
+import BrandModule from "../models/brandModules.js";
 
 
 export const getOil= async (req,res)=>{
@@ -14,6 +15,14 @@ export const getOilUsge= async (req,res)=>{
     try {
         const allOilUsge=await OilUsegModule.find();
         res.status(200).json(allOilUsge);
+    } catch (error) {
+        res.status(404).json({ message: error.message})
+    }
+}
+export const getBrand= async (req,res)=>{
+    try {
+        const allBrands=await BrandModule.find();
+        res.status(200).json(allBrands);
     } catch (error) {
         res.status(404).json({ message: error.message})
     }
@@ -52,5 +61,16 @@ export const deleteOil =async (req,res)=>{
        console.log(error)
    }
 }
+export const deleteBrand =async (req,res)=>{
+    const id = req.params.id;
+ 
+    try {
+         await BrandModule.findByIdAndRemove(id).exec();
+         res.send('done')
+    } catch (error) {
+        console.log(error)
+    }
+ }
+ 
 
 
