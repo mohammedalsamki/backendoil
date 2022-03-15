@@ -8,6 +8,8 @@ import CapacityModule from "../models/capacityModules.js";
 import UnitModule from "../models/unitModule.js";
 
 const router = express.Router();
+const app= express();
+
 
 router.get('/',getOil);
 router.get('/oilUseg',getOilUsge);
@@ -91,6 +93,63 @@ router.delete('/brand/:id',deleteBrand);
 router.delete('/oilGrade/:id',deleteOilGrade);
 router.delete('/capacity/:id',deleteCapacity);
 router.delete('/unit/:id',deleteUnit);
+router.put("/capacity/:id", async (req, res) => {
+    try {
+        const capacity = await CapacityModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(capacity);
+    } catch (error) {
+        res.send(error);
+    }
+});
+router.put("/oilGrade/:id", async (req, res) => {
+    try {
+        const oilGrade = await OilGradeModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(oilGrade);
+    } catch (error) {
+        res.send(error);
+    }
+});
+router.put("/brand/:id", async (req, res) => {
+    try {
+        const brand = await BrandModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(brand);
+    } catch (error) {
+        res.send(error);
+    }
+});
+
+router.put("/oilUseg/:id", async (req, res) => {
+    try {
+        const oilUseg = await OilUsegModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(oilUseg);
+    } catch (error) {
+        res.send(error);
+    }
+});
+router.put("/unit/:id", async (req, res) => {
+    try {
+        const unit = await UnitModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(unit);
+    } catch (error) {
+        res.send(error);
+    }
+});
+
 
 
 
