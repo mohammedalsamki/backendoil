@@ -37,16 +37,35 @@ router.post("/",async (req,res)=>{
      oildata.save()
      res.send(oildata)
 })
-router.post("/oilUseg",async (req,res)=>{
-    const {OilUsageAr,OilUsageEn}=req.body
+router.post('/oilUseg', (req, res, next) => {
+ 
+    var query = req.body.OilUsageEn; //Extract title from input form
+    OilUsegModule.findOne({OilUsageEn:query}, function(err, example){
+        if(err) console.log(err);
+        if ( example){
+            console.log("This OilUsageEn has already been saved");
+        } else {
+ 
+            var example = new OilUsegModule(req.body);
+            example.save(function(err, example) {
+                if(err) console.log(err);
+                console.log("New OilUsageEn created");
+                res.redirect(`/`);
+            });
+        }
+    });
+});
+// router.post("/oilUseg",async (req,res)=>{
+//     const {OilUsageAr,OilUsageEn}=req.body
 
-    let oilUsgedata =  new OilUsegModule({
-        OilUsageAr:OilUsageAr,
-        OilUsageEn:OilUsageEn
-    })
-    oilUsgedata.save()
-     res.send(oilUsgedata)
-})
+//     let oilUsgedata =  new OilUsegModule({
+//         OilUsageAr:OilUsageAr,
+//         OilUsageEn:OilUsageEn
+//     })
+//     oilUsgedata.save()
+//      res.send(oilUsgedata)
+// })
+
 router.post("/brand",async (req,res)=>{
     const {BrandAr,BrandEn}=req.body
 
