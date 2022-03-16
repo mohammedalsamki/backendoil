@@ -43,10 +43,12 @@ router.post('/oilUseg', (req, res, next) => {
     OilUsegModule.findOne({OilUsageEn:query}, function(err, example){
         if(err) console.log(err);
         if ( example){
+            
             console.log("This OilUsageEn has already been saved");
             res.send("This OilUsageEn has already been saved")
 
         } else {
+            
  
             var example = new OilUsegModule(req.body);
             example.save(function(err, example) {
@@ -144,6 +146,7 @@ router.put("/oilUseg/:id", async (req, res) => {
     OilUsegModule.findOne({OilUsageEn:query}, function(err, example){
         if(err) console.log(err);
         if ( example){
+            
             console.log("This OilUsageEn has already been saved");
             res.send("This OilUsageEn has already been saved")
 
@@ -170,12 +173,58 @@ router.put("/oilUseg/:id", async (req, res) => {
                 });
         }
     });
-
-
-
-   
     
+});
+router.put("/spec/:id", async (req, res) => {
+    // var query = req.body.OilUsageEn; //Extract title from input form
 
+    // OilUsegModule.findOne({OilUsageEn:query}, function(err, example){
+    //     if(err) console.log(err);
+    //     if ( example){
+    //        console.log(query)
+
+    var querynew = req.body.Specs;
+    OilUsegModule.findOne({Specs:querynew}, function(err, test){
+     if(err) console.log(err);
+     var colors= [];
+      let Spenew=querynew
+     colors.push(Spenew); 
+
+      console.log(test.Specs)
+      console.log(colors)
+      let dic ={
+        OilUsageAr: "سائل تبريد",
+        OilUsageEn: "سائل",
+        Specs: colors
+    }
+            if (!req.body) {
+                return res.status(400).send({
+                  message: "Data to update can not be empty!"
+                });
+              }
+              const id = req.params.id;
+              OilUsegModule.findByIdAndUpdate(id, dic, { useFindAndModify: false })
+                .then(data => {
+                  if (!data) {
+                    res.status(404).send({
+                      message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
+                    });
+                  } else {
+      
+                      res.send({ test })
+                    };
+                })
+                .catch(err => {
+                  res.status(500).send({
+                    message: "Error updating Tutorial with id=" + id
+                  });
+                });
+            })
+
+
+        // } 
+    // });
+    
 });
 router.put("/unit/:id", async (req, res) => {
     try {
