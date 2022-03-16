@@ -44,13 +44,15 @@ router.post('/oilUseg', (req, res, next) => {
         if(err) console.log(err);
         if ( example){
             console.log("This OilUsageEn has already been saved");
+            res.send("This OilUsageEn has already been saved")
+
         } else {
  
             var example = new OilUsegModule(req.body);
             example.save(function(err, example) {
                 if(err) console.log(err);
                 console.log("New OilUsageEn created");
-                res.redirect(`/`);
+                res.send("New OilUsageEn created")
             });
         }
     });
