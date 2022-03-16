@@ -176,25 +176,24 @@ router.put("/oilUseg/:id", async (req, res) => {
     
 });
 router.put("/spec/:id", async (req, res) => {
-    // var query = req.body.OilUsageEn; //Extract title from input form
 
-    // OilUsegModule.findOne({OilUsageEn:query}, function(err, example){
-    //     if(err) console.log(err);
-    //     if ( example){
-    //        console.log(query)
+    var querynew = req.body.OilUsageEn;
+    var querySpec= req.body.Specs;
 
-    var querynew = req.body.Specs;
-    OilUsegModule.findOne({Specs:querynew}, function(err, test){
+    OilUsegModule.findOne({OilUsageEn:querynew}, function(err, test){
      if(err) console.log(err);
-     var colors= [];
-      let Spenew=querynew
-     colors.push(Spenew); 
+     var colors= test.Specs;
+     console.log("test 1 before",colors)
+     console.log("test test",test)
 
-      console.log(test.Specs)
-      console.log(colors)
+     colors.push(querySpec); 
+     // delete item from spesfication arr
+    //  colors.splice(0, 2);
+
+      console.log("test after",colors)
       let dic ={
-        OilUsageAr: "سائل تبريد",
-        OilUsageEn: "سائل",
+        OilUsageAr: test.OilUsageAr,
+        OilUsageEn: test.OilUsageEn,
         Specs: colors
     }
             if (!req.body) {
@@ -211,7 +210,7 @@ router.put("/spec/:id", async (req, res) => {
                     });
                   } else {
       
-                      res.send({ test })
+                      res.send({ dic })
                     };
                 })
                 .catch(err => {
@@ -220,10 +219,6 @@ router.put("/spec/:id", async (req, res) => {
                   });
                 });
             })
-
-
-        // } 
-    // });
     
 });
 router.put("/unit/:id", async (req, res) => {
