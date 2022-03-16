@@ -57,16 +57,7 @@ router.post('/oilUseg', (req, res, next) => {
         }
     });
 });
-// router.post("/oilUseg",async (req,res)=>{
-//     const {OilUsageAr,OilUsageEn}=req.body
 
-//     let oilUsgedata =  new OilUsegModule({
-//         OilUsageAr:OilUsageAr,
-//         OilUsageEn:OilUsageEn
-//     })
-//     oilUsgedata.save()
-//      res.send(oilUsgedata)
-// })
 
 router.post("/brand",async (req,res)=>{
     const {BrandAr,BrandEn}=req.body
@@ -150,28 +141,41 @@ router.put("/brand/:id", async (req, res) => {
 
 router.put("/oilUseg/:id", async (req, res) => {
     var query = req.body.OilUsageEn; //Extract title from input form
+    OilUsegModule.findOne({OilUsageEn:query}, function(err, example){
+        if(err) console.log(err);
+        if ( example){
+            console.log("This OilUsageEn has already been saved");
+            res.send("This OilUsageEn has already been saved")
 
+        } else {
+ 
+            if (!req.body) {
+                return res.status(400).send({
+                  message: "Data to update can not be empty!"
+                });
+              }
+              const id = req.params.id;
+              OilUsegModule.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+                .then(data => {
+                  if (!data) {
+                    res.status(404).send({
+                      message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
+                    });
+                  } else res.send({ message: "Tutorial was updated successfully." });
+                })
+                .catch(err => {
+                  res.status(500).send({
+                    message: "Error updating Tutorial with id=" + id
+                  });
+                });
+        }
+    });
+
+
+
+   
     
-    try {      
-        OilUsegModule.findOne({OilUsageEn:query}, function (err, example){
-            if(err) console.log(err);
-            if (  example){
-                console.log("This OilUsageEn has already been saved");
-                res.send("This OilUsageEn has already been saved")
-    
-            } 
-    })
-                let oilUseg = await OilUsegModule.findOneAndUpdate(
-                    { _id: req.params.id },
-                    req.body
-                );
-                res.send(oilUseg);
 
-
-
-    } catch (error) {
-        res.send(error);
-    }
 });
 router.put("/unit/:id", async (req, res) => {
     try {
