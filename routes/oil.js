@@ -149,12 +149,26 @@ router.put("/brand/:id", async (req, res) => {
 });
 
 router.put("/oilUseg/:id", async (req, res) => {
-    try {
-        const oilUseg = await OilUsegModule.findOneAndUpdate(
-            { _id: req.params.id },
-            req.body
-        );
-        res.send(oilUseg);
+    var query = req.body.OilUsageEn; //Extract title from input form
+
+    
+    try {      
+        OilUsegModule.findOne({OilUsageEn:query}, function (err, example){
+            if(err) console.log(err);
+            if (  example){
+                console.log("This OilUsageEn has already been saved");
+                res.send("This OilUsageEn has already been saved")
+    
+            } 
+    })
+                let oilUseg = await OilUsegModule.findOneAndUpdate(
+                    { _id: req.params.id },
+                    req.body
+                );
+                res.send(oilUseg);
+
+
+
     } catch (error) {
         res.send(error);
     }
