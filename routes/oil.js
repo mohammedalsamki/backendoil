@@ -6,6 +6,7 @@ import BrandModule from "../models/brandModules.js";
 import OilGradeModule from "../models/oilGradeModule.js";
 import CapacityModule from "../models/capacityModules.js";
 import UnitModule from "../models/unitModule.js";
+// import { getSpec } from "../controllers/oilController.js";
 
 const router = express.Router();
 const app= express();
@@ -13,12 +14,20 @@ const app= express();
 
 router.get('/',getOil);
 router.get('/oilUseg',getOilUsge);
+// router.get('/getspec/:id',getSpec);
+
 router.get('/brand',getBrand);
 router.get('/oilGrade',getOilGrade);
 router.get('/capacity',getCapacity);
 router.get('/unit',getUnit);
 
-
+router.get('/tours/:id', function(req, res) {
+console.log(req.params.id)
+OilUsegModule.findById(req.params.id)
+.then(result=>{
+    res.status(200).json(result)
+})
+ });
 
 
 
@@ -179,48 +188,37 @@ router.put("/spec/:id", async (req, res) => {
 
     var querynew = req.body.OilUsageEn;
     var querySpec= req.body.Specs;
+    console.log("test test",querySpec)
 
-    OilUsegModule.findOne({OilUsageEn:querynew}, function(err, test){
-     if(err) console.log(err);
-     var colors= test.Specs;
-     console.log("test 1 before",colors)
-     console.log("test test",test)
+    await OilUsegModule.findOneAndUpdate({OilUsageEn:querynew},{
 
-     colors.push(querySpec); 
-     // delete item from spesfication arr
-    //  colors.splice(0, 2);
+     $addToSet:{
+        Specs: querySpec
+     }
 
-      console.log("test after",colors)
-      let dic ={
-        OilUsageAr: test.OilUsageAr,
-        OilUsageEn: test.OilUsageEn,
-        Specs: colors
-    }
-            if (!req.body) {
-                return res.status(400).send({
-                  message: "Data to update can not be empty!"
-                });
-              }
-              const id = req.params.id;
-              OilUsegModule.findByIdAndUpdate(id, dic, { useFindAndModify: false })
-                .then(data => {
-                  if (!data) {
-                    res.status(404).send({
-                      message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
-                    });
-                  } else {
-      
-                      res.send({ dic })
-                    };
-                })
-                .catch(err => {
-                  res.status(500).send({
-                    message: "Error updating Tutorial with id=" + id
-                  });
-                });
-            })
-    
+            }).then(
+                res.send("This spec has  been saved")
+        
+             ) 
 });
+router.put("/specDelete/:id", async (req, res) => {
+
+    var querynew = req.body.OilUsageEn;
+    var querySpec= req.body.Specs;
+    console.log("test test",querySpec)
+
+    await OilUsegModule.findOneAndUpdate({OilUsageEn:querynew},{
+
+     $pull:{
+        Specs: querySpec
+     }
+
+            }).then(
+                res.send("This spec has  been Deleted")
+        
+             ) 
+});
+
 router.put("/unit/:id", async (req, res) => {
     try {
         const unit = await UnitModule.findOneAndUpdate(

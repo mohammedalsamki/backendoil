@@ -15,6 +15,16 @@ export const getUnit= async (req,res)=>{
     }
 }
 
+export const getSpec= async (req,res)=>{
+    try {
+        let id =req.params._id
+        const allUnit= await OilUsegModule.findById(id);
+        res.status(200).json(id);
+    } catch (error) {
+        res.status(404).json({ message: error.message})
+    }
+}
+
 export const getOil= async (req,res)=>{
     try {
         const allOil=await OilModule.find();
