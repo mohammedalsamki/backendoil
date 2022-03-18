@@ -204,7 +204,7 @@ router.put("/spec/:id", async (req, res) => {
 router.put("/specDelete/:id", async (req, res) => {
 
     var querynew = req.body.OilUsageEn;
-    var querySpec= req.body.name;
+    var querySpec= req.body.SpecsChiled;
     console.log("test test",querySpec)
 
     await OilUsegModule.findOneAndUpdate({OilUsageEn:querynew},{
