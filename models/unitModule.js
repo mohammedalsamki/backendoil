@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const UnitSchema = mongoose.Schema({
     
-    UnitName:String,
-    UnitDis:String,
+    UnitNameEn:String,
+    UnitNameAr:String,
 
 
 })

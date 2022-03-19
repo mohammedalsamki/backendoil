@@ -101,11 +101,11 @@ router.post("/capacity",async (req,res)=>{
      res.send(oilcapacity)
 })
 router.post("/unit",async (req,res)=>{
-    const {UnitName,UnitDis}=req.body
+    const {UnitNameEn,UnitNameAr}=req.body
 
     let oilUnit =  new UnitModule({
-        UnitName:UnitName,
-        UnitDis:UnitDis
+        UnitNameEn:UnitNameEn,
+        UnitNameAr:UnitNameAr
     })
     oilUnit.save()
      res.send(oilUnit)
