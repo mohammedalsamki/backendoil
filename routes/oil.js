@@ -25,7 +25,7 @@ OilUsegModule.findById(req.params.id)
 
 
 router.post("/",async (req,res)=>{
-    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber}=req.body
+    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber,StockNumber,ItemImage}=req.body
     console.log(req.body)
     let oildata =  new OilModule({
         OilUsage:OilUsage,
