@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const capacitySchema = mongoose.Schema({
     
-    capacityName:String,
     capacityNumber:Number,
 
 

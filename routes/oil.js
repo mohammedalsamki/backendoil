@@ -1,10 +1,10 @@
 import express  from "express";
-import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getOilGrade,deleteOilGrade,getCapacity,deleteCapacity,getUnit,deleteUnit } from "../controllers/oilController.js";
+import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getOilGrade,deleteOilGrade,getUnit,deleteUnit } from "../controllers/oilController.js";
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
 import BrandModule from "../models/brandModules.js";
 import OilGradeModule from "../models/oilGradeModule.js";
-import CapacityModule from "../models/capacityModules.js";
+// import CapacityModule from "../models/capacityModules.js";
 import UnitModule from "../models/unitModule.js";
 // import { getSpec } from "../controllers/oilController.js";
 
@@ -18,7 +18,7 @@ router.get('/oilUseg',getOilUsge);
 
 router.get('/brand',getBrand);
 router.get('/oilGrade',getOilGrade);
-router.get('/capacity',getCapacity);
+// router.get('/capacity',getCapacity);
 router.get('/unit',getUnit);
 
 router.get('/tours/:id', function(req, res) {
@@ -90,16 +90,16 @@ router.post("/oilGrade",async (req,res)=>{
     oilGradedata.save()
      res.send(oilGradedata)
 })
-router.post("/capacity",async (req,res)=>{
-    const {capacityName,capacityNumber}=req.body
+// router.post("/capacity",async (req,res)=>{
+//     const {capacityName,capacityNumber}=req.body
 
-    let oilcapacity =  new CapacityModule({
-        capacityName:capacityName,
-        capacityNumber:capacityNumber
-    })
-    oilcapacity.save()
-     res.send(oilcapacity)
-})
+//     let oilcapacity =  new CapacityModule({
+//         capacityName:capacityName,
+//         capacityNumber:capacityNumber
+//     })
+//     oilcapacity.save()
+//      res.send(oilcapacity)
+// })
 router.post("/unit",async (req,res)=>{
     const {UnitNameEn,UnitNameAr}=req.body
 
@@ -114,19 +114,19 @@ router.delete('/:id',deleteOil);
 router.delete('/oilUseg/:id',deleteOilUsge);
 router.delete('/brand/:id',deleteBrand);
 router.delete('/oilGrade/:id',deleteOilGrade);
-router.delete('/capacity/:id',deleteCapacity);
+// router.delete('/capacity/:id',deleteCapacity);
 router.delete('/unit/:id',deleteUnit);
-router.put("/capacity/:id", async (req, res) => {
-    try {
-        const capacity = await CapacityModule.findOneAndUpdate(
-            { _id: req.params.id },
-            req.body
-        );
-        res.send(capacity);
-    } catch (error) {
-        res.send(error);
-    }
-});
+// router.put("/capacity/:id", async (req, res) => {
+//     try {
+//         const capacity = await CapacityModule.findOneAndUpdate(
+//             { _id: req.params.id },
+//             req.body
+//         );
+//         res.send(capacity);
+//     } catch (error) {
+//         res.send(error);
+//     }
+// });
 router.put("/oilGrade/:id", async (req, res) => {
     try {
         const oilGrade = await OilGradeModule.findOneAndUpdate(
