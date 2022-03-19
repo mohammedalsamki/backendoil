@@ -1,7 +1,6 @@
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
 import BrandModule from "../models/brandModules.js";
-import OilGradeModule from "../models/oilGradeModule.js";
 import CapacityModule from "../models/capacityModules.js";
 import UnitModule from "../models/unitModule.js";
 
@@ -49,14 +48,7 @@ export const getBrand= async (req,res)=>{
         res.status(404).json({ message: error.message})
     }
 }
-export const getOilGrade= async (req,res)=>{
-    try {
-        const allOilGrade=await OilGradeModule.find();
-        res.status(200).json(allOilGrade);
-    } catch (error) {
-        res.status(404).json({ message: error.message})
-    }
-}
+
 export const getCapacity= async (req,res)=>{
     try {
         const allCapacity=await CapacityModule.find();
@@ -97,16 +89,7 @@ export const deleteBrand =async (req,res)=>{
         console.log(error)
     }
  }
- export const deleteOilGrade=async (req,res)=>{
-    const id = req.params.id;
- 
-    try {
-         await OilGradeModule.findByIdAndRemove(id).exec();
-         res.send('done')
-    } catch (error) {
-        console.log(error)
-    }
- }
+
  export const deleteCapacity=async (req,res)=>{
     const id = req.params.id;
  

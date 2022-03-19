@@ -1,12 +1,9 @@
 import express  from "express";
-import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getOilGrade,deleteOilGrade,getUnit,deleteUnit } from "../controllers/oilController.js";
+import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getUnit,deleteUnit } from "../controllers/oilController.js";
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
 import BrandModule from "../models/brandModules.js";
-import OilGradeModule from "../models/oilGradeModule.js";
-// import CapacityModule from "../models/capacityModules.js";
 import UnitModule from "../models/unitModule.js";
-// import { getSpec } from "../controllers/oilController.js";
 
 const router = express.Router();
 const app= express();
@@ -14,11 +11,7 @@ const app= express();
 
 router.get('/',getOil);
 router.get('/oilUseg',getOilUsge);
-// router.get('/getspec/:id',getSpec);
-
 router.get('/brand',getBrand);
-router.get('/oilGrade',getOilGrade);
-// router.get('/capacity',getCapacity);
 router.get('/unit',getUnit);
 
 router.get('/tours/:id', function(req, res) {
@@ -81,26 +74,8 @@ router.post("/brand",async (req,res)=>{
     branddata.save()
      res.send(branddata)
 })
-router.post("/oilGrade",async (req,res)=>{
-    const {OilGradeName,OilGradeDis}=req.body
 
-    let oilGradedata =  new OilGradeModule({
-        OilGradeName:OilGradeName,
-        OilGradeDis:OilGradeDis
-    })
-    oilGradedata.save()
-     res.send(oilGradedata)
-})
-// router.post("/capacity",async (req,res)=>{
-//     const {capacityName,capacityNumber}=req.body
 
-//     let oilcapacity =  new CapacityModule({
-//         capacityName:capacityName,
-//         capacityNumber:capacityNumber
-//     })
-//     oilcapacity.save()
-//      res.send(oilcapacity)
-// })
 router.post("/unit",async (req,res)=>{
     const {UnitNameEn,UnitNameAr}=req.body
 
@@ -114,31 +89,9 @@ router.post("/unit",async (req,res)=>{
 router.delete('/:id',deleteOil);
 router.delete('/oilUseg/:id',deleteOilUsge);
 router.delete('/brand/:id',deleteBrand);
-router.delete('/oilGrade/:id',deleteOilGrade);
-// router.delete('/capacity/:id',deleteCapacity);
 router.delete('/unit/:id',deleteUnit);
-// router.put("/capacity/:id", async (req, res) => {
-//     try {
-//         const capacity = await CapacityModule.findOneAndUpdate(
-//             { _id: req.params.id },
-//             req.body
-//         );
-//         res.send(capacity);
-//     } catch (error) {
-//         res.send(error);
-//     }
-// });
-router.put("/oilGrade/:id", async (req, res) => {
-    try {
-        const oilGrade = await OilGradeModule.findOneAndUpdate(
-            { _id: req.params.id },
-            req.body
-        );
-        res.send(oilGrade);
-    } catch (error) {
-        res.send(error);
-    }
-});
+
+
 router.put("/brand/:id", async (req, res) => {
     try {
         const brand = await BrandModule.findOneAndUpdate(
@@ -150,7 +103,17 @@ router.put("/brand/:id", async (req, res) => {
         res.send(error);
     }
 });
-
+router.put("/:id", async (req, res) => {
+    try {
+        const brand = await BrandModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(brand);
+    } catch (error) {
+        res.send(error);
+    }
+});
 router.put("/oilUseg/:id", async (req, res) => {
     var query = req.body.OilUsageEn; //Extract title from input form
     OilUsegModule.findOne({OilUsageEn:query}, function(err, example){
