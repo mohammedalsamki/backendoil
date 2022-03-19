@@ -32,7 +32,7 @@ OilUsegModule.findById(req.params.id)
 
 
 router.post("/",async (req,res)=>{
-    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}=req.body
+    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice}=req.body
     console.log(req.body)
     let oildata =  new OilModule({
         OilUsage:OilUsage,
@@ -41,7 +41,8 @@ router.post("/",async (req,res)=>{
         OilGrade:OilGrade,
         Unit:Unit,
         UnitPrice:UnitPrice,
-        StockQuantiti:StockQuantiti
+        StockQuantiti:StockQuantiti,
+        SaelsPrice:SaelsPrice
     })
      oildata.save()
      res.send(oildata)
