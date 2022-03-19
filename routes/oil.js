@@ -105,7 +105,7 @@ router.put("/brand/:id", async (req, res) => {
 });
 router.put("/:id", async (req, res) => {
     try {
-        const brand = await BrandModule.findOneAndUpdate(
+        const brand = await OilModule.findOneAndUpdate(
             { _id: req.params.id },
             req.body
         );
