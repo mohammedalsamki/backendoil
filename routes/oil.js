@@ -25,7 +25,7 @@ OilUsegModule.findById(req.params.id)
 
 
 router.post("/",async (req,res)=>{
-    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice}=req.body
+    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber}=req.body
     console.log(req.body)
     let oildata =  new OilModule({
         OilUsage:OilUsage,
@@ -35,7 +35,11 @@ router.post("/",async (req,res)=>{
         Unit:Unit,
         UnitPrice:UnitPrice,
         StockQuantiti:StockQuantiti,
-        SaelsPrice:SaelsPrice
+        SaelsPrice:SaelsPrice,
+        Note:Note,
+        PartNumber:PartNumber,
+        StockNumber:StockNumber,
+        ItemImage:ItemImage
     })
      oildata.save()
      res.send(oildata)
@@ -65,11 +69,13 @@ router.post('/oilUseg', (req, res, next) => {
 
 
 router.post("/brand",async (req,res)=>{
-    const {BrandAr,BrandEn}=req.body
+    const {BrandAr,BrandEn,BrandImage,BrandDiscr}=req.body
 
     let branddata =  new BrandModule({
         BrandAr:BrandAr,
-        BrandEn:BrandEn
+        BrandEn:BrandEn,
+        BrandImage:BrandImage,
+        BrandDiscr:BrandDiscr
     })
     branddata.save()
      res.send(branddata)
