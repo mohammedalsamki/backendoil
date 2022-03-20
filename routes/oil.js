@@ -1,18 +1,31 @@
 import express  from "express";
-import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getUnit,deleteUnit } from "../controllers/oilController.js";
+import { getOil,deleteOil,getOilUsge,deleteOilUsge,getBrand,deleteBrand,getUnit,deleteUnit, } from "../controllers/oilController.js";
 import OilModule from "../models/oilModel.js";
 import OilUsegModule from "../models/oilUsgeModule.js";
 import BrandModule from "../models/brandModules.js";
 import UnitModule from "../models/unitModule.js";
+import multer  from "multer";
+
 
 const router = express.Router();
 const app= express();
 
+const storage=multer.diskStorage({
+    destination:(req,file,cd)=>{
+        cd(null,'./public');
+    },
+    filename: (req, file, cb) => {
+        const fileName = `${Date.now()}_${file.originalname.replace(/\s+/g, '-')}`;
+        cb(null, fileName);
+      },
+});
+const upload = multer({ storage }).single('receipt');
 
 router.get('/',getOil);
 router.get('/oilUseg',getOilUsge);
 router.get('/brand',getBrand);
 router.get('/unit',getUnit);
+
 
 router.get('/tours/:id', function(req, res) {
 console.log(req.params.id)
@@ -24,8 +37,9 @@ OilUsegModule.findById(req.params.id)
 
 
 
-router.post("/",async (req,res)=>{
+router.post("/",upload,async (req,res)=>{
     const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber,StockNumber,ItemImage}=req.body
+    const file =req;
     console.log(req.body)
     let oildata =  new OilModule({
         OilUsage:OilUsage,
@@ -39,7 +53,7 @@ router.post("/",async (req,res)=>{
         Note:Note,
         PartNumber:PartNumber,
         StockNumber:StockNumber,
-        ItemImage:ItemImage
+        ItemImage:file.path || null,
     })
      oildata.save()
      res.send(oildata)
@@ -82,6 +96,7 @@ router.post("/brand",async (req,res)=>{
 })
 
 
+
 router.post("/unit",async (req,res)=>{
     const {UnitNameEn,UnitNameAr}=req.body
 
@@ -97,6 +112,18 @@ router.delete('/oilUseg/:id',deleteOilUsge);
 router.delete('/brand/:id',deleteBrand);
 router.delete('/unit/:id',deleteUnit);
 
+
+router.put("/:id", async (req, res) => {
+    try {
+        const brand = await OilModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(brand);
+    } catch (error) {
+        res.send(error);
+    }
+});
 
 router.put("/brand/:id", async (req, res) => {
     try {

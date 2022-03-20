@@ -2,7 +2,9 @@ import  express  from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from 'cors';
-import router from './routes/oil.js';
+import oil from './routes/oil.js';
+import filter from './routes/filter.js';
+
 import 'dotenv/config'
 
 const app = express();
@@ -10,14 +12,10 @@ app.use(express.json());
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
-// app.use('/oil',router);
-app.use('/api/oil',router)
+app.use('/api/oil',oil)
+app.use('/api/filter',filter)
 
-
-
-// app.use(bodyParser.json({limit:"20mb",extended:true}))
-// app.use(bodyParser.urlencoded({limit:"20mb",extended:true}))
-
+app.use(express.static('public'));
 
 
 const CONNECTION_URL=process.env.CONNECTION_URL;
