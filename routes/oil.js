@@ -38,7 +38,7 @@ OilUsegModule.findById(req.params.id)
 
 
 router.post("/",upload,async (req,res)=>{
-    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber,StockNumber,ItemImage}=req.body
+    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber,StockNumber,ItemImage,MinQty}=req.body
     const file =req;
     console.log(req.body)
     let oildata =  new OilModule({
@@ -53,7 +53,8 @@ router.post("/",upload,async (req,res)=>{
         Note:Note,
         PartNumber:PartNumber,
         StockNumber:StockNumber,
-        ItemImage:file.path || null,
+        ItemImage:file.path || ItemImage,
+        MinQty:MinQty
     })
      oildata.save()
      res.send(oildata)

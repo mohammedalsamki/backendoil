@@ -13,7 +13,8 @@ const oilSchema = mongoose.Schema({
     Note:String,
     PartNumber:Number,
     StockNumber:Number,
-    ItemImage:String
+    ItemImage:String,
+    MinQty:Number
  
 })
 
