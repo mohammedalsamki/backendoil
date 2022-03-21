@@ -29,7 +29,7 @@ router.get('/filter/usage/:id', function(req, res) {
          });
 
 router.post("/filter",async (req,res)=>{
-        const {FilterUsage,Brand,StockQuantity,UnitPrice,SaelsPrice,Note,PartNumber,StockNumber,ItemImage}=req.body
+        const {FilterUsage,Brand,StockQuantity,UnitPrice,SaelsPrice,Note,PartNumber,StockNumber,ItemImage,MinQty}=req.body
     
         let filterData =  new FilterModule({
             FilterUsage:FilterUsage,
@@ -40,7 +40,8 @@ router.post("/filter",async (req,res)=>{
             Note:Note,
             PartNumber:PartNumber,
             StockNumber:StockNumber,
-            ItemImage:ItemImage
+            ItemImage:ItemImage,
+            MinQty:MinQty
     
         })
         filterData.save()
