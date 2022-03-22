@@ -19,7 +19,7 @@ const storage=multer.diskStorage({
         cb(null, fileName);
       },
 });
-const upload = multer({ storage }).single('receipt');
+const upload = multer({ storage }).single('ItemImage');
 
 router.get('/',getOil);
 router.get('/oilUseg',getOilUsge);
@@ -36,10 +36,16 @@ OilUsegModule.findById(req.params.id)
  });
 
 
-
+router.post('/uploade',upload,(req,res)=>{
+    const {file}=req;
+    res.send({
+        file:file.originalname,
+        path:file.path
+    })
+})
 router.post("/",upload,async (req,res)=>{
-    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber,StockNumber,ItemImage,MinQty}=req.body
-    const file =req;
+    const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,PartNumber,StockNumber,MinQty}=req.body
+    const {file}=req;
     console.log(req.body)
     let oildata =  new OilModule({
         OilUsage:OilUsage,
@@ -53,7 +59,7 @@ router.post("/",upload,async (req,res)=>{
         Note:Note,
         PartNumber:PartNumber,
         StockNumber:StockNumber,
-        ItemImage:file.path || ItemImage,
+        ItemImage: (file && file.path) || null,
         MinQty:MinQty
     })
      oildata.save()
