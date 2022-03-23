@@ -10,7 +10,7 @@ const filterSchema = mongoose.Schema({
     Note:String,
     BrandPartNumber:String,
     OEMPartNumber:String,
-    StockNumber:Number,
+    StockNumber:String,
     ItemImage:String,
     MinQty:Number
  
