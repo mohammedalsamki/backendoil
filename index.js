@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from 'cors';
 import oil from './routes/oil.js';
 import filter from './routes/filter.js';
+import brake from './routes/brake.js';
 
 import 'dotenv/config'
 
@@ -14,6 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 app.use('/api/oil',oil)
 app.use('/api/filter',filter)
+app.use('/api/brake',brake)
+
 
 app.use(express.static('public'));
 
