@@ -29,7 +29,7 @@ router.get('/brake/usage/:id', function(req, res) {
          });
 
 router.post("/brake",async (req,res)=>{
-        const {brakeUsage,Brand,StockQuantity,UnitPrice,SaelsPrice,Note,PartNumber,StockNumber,ItemImage,MinQty}=req.body
+        const {brakeUsage,Brand,StockQuantity,UnitPrice,SaelsPrice,Note,OEMPartNumber,StockNumber,ItemImage,MinQty,BrandPartNumber}=req.body
     
         let brakeData =  new BrakeModule({
             brakeUsage:brakeUsage,
@@ -38,10 +38,11 @@ router.post("/brake",async (req,res)=>{
             UnitPrice:UnitPrice,
             SaelsPrice:SaelsPrice,
             Note:Note,
-            PartNumber:PartNumber,
+            OEMPartNumber:OEMPartNumber,
             StockNumber:StockNumber,
             ItemImage:ItemImage,
-            MinQty:MinQty
+            MinQty:MinQty,
+            BrandPartNumber:BrandPartNumber
     
         })
         brakeData.save()

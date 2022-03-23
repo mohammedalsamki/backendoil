@@ -8,8 +8,9 @@ const brakeSchema = mongoose.Schema({
     UnitPrice:Number,
     SaelsPrice:Number,
     Note:String,
-    PartNumber:String,
-    StockNumber:Number,
+    BrandPartNumber:String,
+    OEMPartNumber:String,
+    StockNumber:String,
     ItemImage:String,
     MinQty:Number
  

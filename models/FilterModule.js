@@ -8,7 +8,8 @@ const filterSchema = mongoose.Schema({
     UnitPrice:Number,
     SaelsPrice:Number,
     Note:String,
-    PartNumber:String,
+    BrandPartNumber:String,
+    OEMPartNumber:String,
     StockNumber:Number,
     ItemImage:String,
     MinQty:Number
