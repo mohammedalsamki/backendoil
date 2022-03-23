@@ -43,7 +43,7 @@ router.post('/uploade',upload,(req,res)=>{
         path:file.path
     })
 })
-router.post("/",upload,async (req,res)=>{
+router.post("/",async (req,res)=>{
     const {OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti,SaelsPrice,Note,BrandPartNumber,StockNumber,MinQty,ItemImage,OEMPartNumber}=req.body
     const {file}=req;
     console.log(req.body)

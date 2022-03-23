@@ -7,6 +7,7 @@ const oilSchema = mongoose.Schema({
     OilGrade:String,
     Capasity:Number,
     StockNumber:String,
+    StockQuantiti:Number,
     UnitPrice:Number,
     Unit:String,
     SaelsPrice:Number,
