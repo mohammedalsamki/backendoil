@@ -7,6 +7,8 @@ import filter from './routes/filter.js';
 import brake from './routes/brake.js';
 import spark from './routes/spark.js'
 import belt from './routes/belt.js'
+import carCare from './routes/carCare.js'
+
 
 
 import 'dotenv/config'
@@ -21,6 +23,7 @@ app.use('/api/filter',filter)
 app.use('/api/brake',brake)
 app.use('/api/spark',spark)
 app.use('/api/belt',belt)
+app.use('/api/carCare',carCare)
 
 
 
