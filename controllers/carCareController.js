@@ -1,4 +1,4 @@
-import carCareModule from "../models/carCare/carCareUsgeModule.js";
+import carCareModule from "../models/carCare/carCareModel.js";
 import carCareUsegModule from "../models/carCare/carCareUsgeModule.js";
 
 export const getcarCare= async (req,res)=>{
