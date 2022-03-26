@@ -7,6 +7,6 @@ const beltUsegSchema = mongoose.Schema({
     
 
 })
-const beltUsegModule =mongoose.model('originated',beltUsegSchema);
+const beltUsegModule =mongoose.model('originatedBelt',beltUsegSchema);
 
 export default beltUsegModule;
