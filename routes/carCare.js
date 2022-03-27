@@ -29,8 +29,7 @@ router.get('/carCare/usage/:id', function(req, res) {
          });
 
 router.post("/carCare",async (req,res)=>{
-        const {carCareUsage,Brand,Capasity,StockQuantiti,UnitPrice,SaelsPrice,Note,BrandPartNumber,StockNumber,ItemImage,MinQty,OEMPartNumber,Unit}=req.body
-    
+        const {carCareUsage,Brand,StockQuantiti,UnitPrice,SaelsPrice,Note,BrandPartNumber,StockNumber,ItemImage,MinQty,OEMPartNumber,Unit,Capasity}=req.body
         let carCareData =  new carCareModule({
             carCareUsage:carCareUsage,
             Brand:Brand,
