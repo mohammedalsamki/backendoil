@@ -80,7 +80,7 @@ router.post("/lamps/usage",async (req,res)=>{
     router.post("/lamps/EStander",async (req,res)=>{
         const {EStanderAr,EStanderEn}=req.body
     
-        let lampsData =  new lampsUsegModule({
+        let lampsData =  new EStanderModule({
             EStanderAr:EStanderAr,
             EStanderEn:EStanderEn
     
