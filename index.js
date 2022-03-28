@@ -9,6 +9,7 @@ import spark from './routes/spark.js'
 import belt from './routes/belt.js'
 import carCare from './routes/carCare.js'
 import lamps from './routes/lamps.js'
+import category from "./routes/category.js";
 
 
 
@@ -26,6 +27,8 @@ app.use('/api/spark',spark)
 app.use('/api/belt',belt)
 app.use('/api/carCare',carCare)
 app.use('/api/lamps',lamps)
+app.use('/api/category',category)
+
 
 
 
