@@ -21,7 +21,20 @@ const buildAncestors = async (id, parent_id) => {
 
  router.post('/', async (req, res) => {
     let parent = req.body.parent ? req.body.parent : null;
-    const category = new Category({name: req.body.name, parent})
+    const category = new Category({
+        name: req.body.name, 
+        Brand: req.body.Brand, 
+        ItemImage: req.body.ItemImage, 
+        Note: req.body.Note, 
+        OEMPartNumber: req.body.OEMPartNumber, 
+        BrandPartNumber: req.body.BrandPartNumber, 
+        StockNumber: req.body.StockNumber, 
+        MinQty: req.body.MinQty, 
+        StockQuantity: req.body.StockQuantity, 
+        UnitPrice: req.body.UnitPrice, 
+        SaelsPrice: req.body.SaelsPrice, 
+
+        parent})
   try {
     let newCategory = await category.save();
     buildAncestors(newCategory._id, parent)
@@ -80,10 +93,45 @@ const buildAncestors = async (id, parent_id) => {
     router.put("/update/:id", async (req, res) => {
         const category_id=req.params.id;
         const category_name=req.body.category_name;
+        const Brand= req.body.Brand; 
+        const ItemImage= req.body.ItemImage;
+        const Note= req.body.Note;
+        const OEMPartNumber= req.body.OEMPartNumber;
+        const  BrandPartNumber= req.body.BrandPartNumber;
+        const StockNumber= req.body.StockNumber;
+        const MinQty= req.body.MinQty;
+        const StockQuantity= req.body.StockQuantity;
+        const UnitPrice= req.body.UnitPrice;
+        const SaelsPrice= req.body.SaelsPrice;
         try {
-            const category = await Category.findByIdAndUpdate(category_id, { $set: { "name": category_name, "slug": slugify(category_name) } });
+            const category = await Category.findByIdAndUpdate(category_id, { $set: { 
+                "name": category_name,
+                'Brand':Brand, 
+                'ItemImage':ItemImage, 
+                'Note':Note, 
+                'OEMPartNumber':OEMPartNumber, 
+                'BrandPartNumber':BrandPartNumber, 
+                'StockNumber':StockNumber, 
+                'MinQty':MinQty, 
+                'StockQuantity':StockQuantity, 
+                'UnitPrice':UnitPrice, 
+                'SaelsPrice':SaelsPrice, 
+                "slug": slugify(category_name) } });
             const ancestors =await Category.updateMany({"ancestors._id": category_id},
-                {"$set": {"ancestors.$.name": category_name, "ancestors.$.slug": slugify(category_name) }}, {multi: true});
+                {"$set": {
+                    "ancestors.$.name": category_name, 
+                    "ancestors.$.Brand": Brand, 
+                    "ancestors.$.ItemImage": ItemImage, 
+                    "ancestors.$.Note": Note, 
+                    "ancestors.$.OEMPartNumber": OEMPartNumber, 
+                    "ancestors.$.BrandPartNumber": BrandPartNumber, 
+                    "ancestors.$.StockNumber": StockNumber, 
+                    "ancestors.$.MinQty": MinQty, 
+                    "ancestors.$.StockQuantity": StockQuantity, 
+                    "ancestors.$.UnitPrice": UnitPrice, 
+                    "ancestors.$.SaelsPrice": SaelsPrice, 
+
+                    "ancestors.$.slug": slugify(category_name) }}, {multi: true});
             res.status(201).send({ "status": "success", "result": ancestors });
         } catch (error) {
             res.send(error);

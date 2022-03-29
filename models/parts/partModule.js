@@ -4,6 +4,16 @@ import mongoose from 'mongoose';
 const CategorySchema = new mongoose.Schema({
     name: String,
     slug: { type: String, index: true },
+    Brand:String,
+    ItemImage:String,
+    Note:String,
+    OEMPartNumber:String,
+    BrandPartNumber:String,
+    StockNumber:String,
+    MinQty:Number,
+    StockQuantity:Number,
+    UnitPrice:Number,
+    SaelsPrice:Number,
     parent: {
       type: mongoose.Schema.Types.ObjectId,
       default: null,
@@ -16,7 +26,17 @@ const CategorySchema = new mongoose.Schema({
             index: true
     },
          name: String,
-         slug: String
+         slug: String,    
+         Brand:String,
+         ItemImage:String,
+         Note:String,
+         OEMPartNumber:String,
+         BrandPartNumber:String,
+         StockNumber:String,
+         MinQty:Number,
+         StockQuantity:Number,
+         UnitPrice:Number,
+         SaelsPrice:Number,
     }]
     });
 
