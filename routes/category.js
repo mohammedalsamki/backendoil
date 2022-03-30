@@ -23,16 +23,16 @@ const buildAncestors = async (id, parent_id) => {
     let parent = req.body.parent ? req.body.parent : null;
     const category = new Category({
         name: req.body.name, 
-        Brand: req.body.Brand, 
-        ItemImage: req.body.ItemImage, 
-        Note: req.body.Note, 
-        OEMPartNumber: req.body.OEMPartNumber, 
-        BrandPartNumber: req.body.BrandPartNumber, 
-        StockNumber: req.body.StockNumber, 
-        MinQty: req.body.MinQty, 
-        StockQuantity: req.body.StockQuantity, 
-        UnitPrice: req.body.UnitPrice, 
-        SaelsPrice: req.body.SaelsPrice, 
+        // Brand: req.body.Brand, 
+        // ItemImage: req.body.ItemImage, 
+        nameEn: req.body.nameEn, 
+        // OEMPartNumber: req.body.OEMPartNumber, 
+        // BrandPartNumber: req.body.BrandPartNumber, 
+        // StockNumber: req.body.StockNumber, 
+        // MinQty: req.body.MinQty, 
+        // StockQuantity: req.body.StockQuantity, 
+        // UnitPrice: req.body.UnitPrice, 
+        // SaelsPrice: req.body.SaelsPrice, 
 
         parent})
   try {
@@ -95,7 +95,7 @@ const buildAncestors = async (id, parent_id) => {
         const category_name=req.body.category_name;
         const Brand= req.body.Brand; 
         const ItemImage= req.body.ItemImage;
-        const Note= req.body.Note;
+        const nameEn= req.body.nameEn;
         const OEMPartNumber= req.body.OEMPartNumber;
         const  BrandPartNumber= req.body.BrandPartNumber;
         const StockNumber= req.body.StockNumber;
@@ -106,30 +106,30 @@ const buildAncestors = async (id, parent_id) => {
         try {
             const category = await Category.findByIdAndUpdate(category_id, { $set: { 
                 "name": category_name,
-                'Brand':Brand, 
+                // 'Brand':Brand, 
                 'ItemImage':ItemImage, 
-                'Note':Note, 
-                'OEMPartNumber':OEMPartNumber, 
-                'BrandPartNumber':BrandPartNumber, 
-                'StockNumber':StockNumber, 
-                'MinQty':MinQty, 
-                'StockQuantity':StockQuantity, 
-                'UnitPrice':UnitPrice, 
-                'SaelsPrice':SaelsPrice, 
+                'nameEn':nameEn, 
+                // 'OEMPartNumber':OEMPartNumber, 
+                // 'BrandPartNumber':BrandPartNumber, 
+                // 'StockNumber':StockNumber, 
+                // 'MinQty':MinQty, 
+                // 'StockQuantity':StockQuantity, 
+                // 'UnitPrice':UnitPrice, 
+                // 'SaelsPrice':SaelsPrice, 
                 "slug": slugify(category_name) } });
             const ancestors =await Category.updateMany({"ancestors._id": category_id},
                 {"$set": {
                     "ancestors.$.name": category_name, 
-                    "ancestors.$.Brand": Brand, 
+                    // "ancestors.$.Brand": Brand, 
                     "ancestors.$.ItemImage": ItemImage, 
-                    "ancestors.$.Note": Note, 
-                    "ancestors.$.OEMPartNumber": OEMPartNumber, 
-                    "ancestors.$.BrandPartNumber": BrandPartNumber, 
-                    "ancestors.$.StockNumber": StockNumber, 
-                    "ancestors.$.MinQty": MinQty, 
-                    "ancestors.$.StockQuantity": StockQuantity, 
-                    "ancestors.$.UnitPrice": UnitPrice, 
-                    "ancestors.$.SaelsPrice": SaelsPrice, 
+                    "ancestors.$.nameEn": nameEn, 
+                    // "ancestors.$.OEMPartNumber": OEMPartNumber, 
+                    // "ancestors.$.BrandPartNumber": BrandPartNumber, 
+                    // "ancestors.$.StockNumber": StockNumber, 
+                    // "ancestors.$.MinQty": MinQty, 
+                    // "ancestors.$.StockQuantity": StockQuantity, 
+                    // "ancestors.$.UnitPrice": UnitPrice, 
+                    // "ancestors.$.SaelsPrice": SaelsPrice, 
 
                     "ancestors.$.slug": slugify(category_name) }}, {multi: true});
             res.status(201).send({ "status": "success", "result": ancestors });
