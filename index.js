@@ -10,6 +10,9 @@ import belt from './routes/belt.js'
 import carCare from './routes/carCare.js'
 import lamps from './routes/lamps.js'
 import category from "./routes/category.js";
+import categoryNew from "./routes/categoryNew.js";
+import products from "./routes/products.js"
+import cart from "./routes/cart.js"
 
 
 
@@ -20,20 +23,18 @@ app.use(express.json());
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
-app.use('/api/oil',oil)
-app.use('/api/filter',filter)
-app.use('/api/brake',brake)
-app.use('/api/spark',spark)
-app.use('/api/belt',belt)
-app.use('/api/carCare',carCare)
-app.use('/api/lamps',lamps)
-app.use('/api/category',category)
-
-
-
-
-
-app.use(express.static('public'));
+app.use('/api/oil',oil);
+app.use('/api/filter',filter);
+app.use('/api/brake',brake);
+app.use('/api/spark',spark);
+app.use('/api/belt',belt);
+app.use('/api/carCare',carCare);
+app.use('/api/lamps',lamps);
+app.use('/api/category',category);
+app.use('/api/categoryNew',categoryNew);
+app.use('/api/products',products);
+app.use('/api/cart',cart);
+app.use(express.static('uploads'));
 
 
 const CONNECTION_URL=process.env.CONNECTION_URL;
