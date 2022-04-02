@@ -20,14 +20,9 @@ const storage = multer.diskStorage({
   
   const upload = multer({ storage: storage })
 
-router.post('/product/create',upload.single('ItemImage'),(req,res)=>{
-         const {name,nameAr,Brand,category,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty}=req.body;
-         let ItemImage=[]
-         if(req.file.length>0){
-            ItemImage=req.file.map(file=>{
-                return { img: file.filename }
-            });
-         }
+router.post('/product/create',(req,res)=>{
+         const {name,nameAr,Brand,category,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
+
     const product= new ProductModule({
         name:name,
         nameAr:nameAr,
@@ -52,35 +47,51 @@ router.post('/product/create',upload.single('ItemImage'),(req,res)=>{
     }))
 
 });
-// function creatCategorys(category,parentID=null){
-//     const categoryList=[]
-//     let cate
-//     if(parentID==null){
-//         cate=category.filter(cat=>cat.parentID==undefined);
-//     }else{
-//         cate=category.filter(cat=>cat.parentID==parentID)
-//     }
-//     for(let cat of cate){
-//      categoryList.push({
-//          _id:cat._id,
-//          name:cat.name,
-//          slug:cat.slug,
-//          cheldren:creatCategorys(category,cat._id)
-//      })
-//     }
-//     return categoryList
-// }
-// router.get('/category/get',(req,res)=>{
-//     CategoryModule.find({})
-//     .exec((error,category)=>{
-//      if(error) return res.status(400).json({error});
-//      if (category){
-//          const categoryList =creatCategorys(category)
-//         return res.status(201).json({categoryList});
-//     }
-//     })
-// })
+router.get('/product/get/:id', function(req, res) {
+  console.log(req.params.id)
+  ProductModule.findById(req.params.id)
+  .then(result=>{
+      res.status(200).json(result)
+  })
+   });
+   router.get('/product/cat/', function(req, res) {
+    console.log(req.params.id)
+    const cat = req.body.category
+    ProductModule.find({category:cat})
+    .then(result=>{
+        res.status(200).json(result)
+    })
+     });
 
+router.get('/product/get/', function(req, res) {
+  console.log(req.params.id)
+  ProductModule.find()
+  .then(result=>{
+      res.status(200).json(result)
+  })
+   });
 
+   router.put("/:id", async (req, res) => {
+    try {
+        const product = await ProductModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(product);
+    } catch (error) {
+        res.send(error);
+    }
+});
 
+router.delete('/:id',async(req,res)=>{
+  const id = req.params.id;
+
+try {
+     await ProductModule.findByIdAndRemove(id).exec();
+     res.send('done')
+} catch (error) {
+    console.log(error)
+}
+}
+)
 export default router;

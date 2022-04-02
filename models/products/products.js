@@ -5,10 +5,7 @@ const ProductSchema = new mongoose.Schema({
     name:{type:String,required:true,trim:true},
     nameAr:{type:String,required:true,trim:true},
     slug :{type:String,required:true,unique:true},
-    Brand:[{
-        BrandId:{type:mongoose.Schema.Types.ObjectId,ref:'Brand'},
-        name:String
-    }],
+    Brand:{type:mongoose.Schema.Types.ObjectId,ref:'Brand'},
     category:{type:mongoose.Schema.Types.ObjectId,ref:'CategoryMain'},
     StockQuantity:Number,
     UnitPrice:Number,
@@ -17,9 +14,7 @@ const ProductSchema = new mongoose.Schema({
     BrandPartNumber:String,
     OEMPartNumber:String,
     StockNumber:String,
-    ItemImage:[
-        {img:{type:String}}
-    ],
+    ItemImage:String,
     MinQty:Number,
     updatedAt:Date
 
@@ -28,5 +23,5 @@ const ProductSchema = new mongoose.Schema({
 
 
 
-const ProductModule =mongoose.model('Peoduct',ProductSchema);
+const ProductModule =mongoose.model('Product',ProductSchema);
 export default ProductModule;
