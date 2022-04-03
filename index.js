@@ -13,6 +13,7 @@ import category from "./routes/category.js";
 import categoryNew from "./routes/categoryNew.js";
 import products from "./routes/products.js"
 import cart from "./routes/cart.js"
+import bumps from './routes/bumps.js'
 
 
 
@@ -34,6 +35,7 @@ app.use('/api/category',category);
 app.use('/api/categoryNew',categoryNew);
 app.use('/api/products',products);
 app.use('/api/cart',cart);
+app.use('/api/bumps',bumps);
 app.use(express.static('uploads'));
 
 

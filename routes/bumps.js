@@ -1,0 +1,95 @@
+import express  from "express";
+import bumpsModule from "../models/bumps/bumpsModule.js";
+import slugify from "slugify";
+import multer from "multer";
+
+
+const router = express.Router();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+  
+  const upload = multer({ storage: storage })
+
+router.post('/bumps/create',(req,res)=>{
+         const {name,nameAr,Brand,category,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
+
+    const bumps= new bumpsModule({
+        name:name,
+        nameAr:nameAr,
+        slug:slugify(name),
+        Brand:Brand,
+        category:category,
+        StockQuantity:StockQuantity,
+        UnitPrice:UnitPrice,
+        SaelsPrice:SaelsPrice,
+        Note:Note,
+        BrandPartNumber:BrandPartNumber,
+        OEMPartNumber:OEMPartNumber,
+        StockNumber:StockNumber,
+        ItemImage:ItemImage,
+        MinQty:MinQty
+    });
+    bumps.save(((error,bumps)=>{
+        if(error) return res.status(400).json({error});
+        if(bumps){
+            res.status(201).json({bumps})
+        }
+    }))
+
+});
+router.get('/bumps/get/:id', function(req, res) {
+  console.log(req.params.id)
+  bumpsModule.findById(req.params.id)
+  .then(result=>{
+      res.status(200).json(result)
+  })
+   });
+   router.get('/bumps/cat/', function(req, res) {
+    console.log(req.params.id)
+    const cat = req.body.category
+    bumpsModule.find({category:cat})
+    .then(result=>{
+        res.status(200).json(result)
+    })
+     });
+
+router.get('/bumps/get/', function(req, res) {
+  console.log(req.params.id)
+  bumpsModule.find()
+  .then(result=>{
+      res.status(200).json(result)
+  })
+   });
+
+   router.put("/:id", async (req, res) => {
+    try {
+        const bumps = await bumpsModule.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send(bumps);
+    } catch (error) {
+        res.send(error);
+    }
+});
+
+router.delete('/:id',async(req,res)=>{
+  const id = req.params.id;
+
+try {
+     await bumpsModule.findByIdAndRemove(id).exec();
+     res.send('done')
+} catch (error) {
+    console.log(error)
+}
+}
+)
+export default router;
