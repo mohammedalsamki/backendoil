@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
     slug :{type:String,required:true,unique:true},
     // Brand:{type:mongoose.Schema.Types.ObjectId,ref:'Brand'},
     Brand:String,
-
+    usedFor:String,
     category:{type:mongoose.Schema.Types.ObjectId,ref:'CategoryMain'},
     StockQuantity:Number,
     UnitPrice:Number,

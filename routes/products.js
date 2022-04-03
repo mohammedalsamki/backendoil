@@ -21,11 +21,12 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage })
 
 router.post('/product/create',(req,res)=>{
-         const {name,nameAr,Brand,category,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
+         const {name,nameAr,usedFor,Brand,category,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
 
     const product= new ProductModule({
         name:name,
         nameAr:nameAr,
+        usedFor:usedFor,
         slug:slugify(name),
         Brand:Brand,
         category:category,
