@@ -38,7 +38,7 @@ router.post('/bumps/create',(req,res)=>{
     const bumps= new bumpsModule({
         // name:name,
         // nameAr:nameAr,
-        slug:slugify(name),
+        // slug:slugify(name),
         Brand:Brand,
         category:category,
         usedFor:usedFor,
