@@ -33,11 +33,11 @@ router.post('/use',(req,res)=>{
 })
 
 router.post('/bumps/create',(req,res)=>{
-         const {name,nameAr,Brand,category,usedFor,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
+         const {Brand,category,usedFor,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
 
     const bumps= new bumpsModule({
-        name:name,
-        nameAr:nameAr,
+        // name:name,
+        // nameAr:nameAr,
         slug:slugify(name),
         Brand:Brand,
         category:category,
