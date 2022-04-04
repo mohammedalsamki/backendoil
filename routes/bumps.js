@@ -1,7 +1,7 @@
 import express  from "express";
 import bumpsModule from "../models/bumps/bumpsModule.js";
 import pumpsUsegModule from "../models/bumps/usemodule.js";
-import slugify from "slugify";
+// import slugify from "slugify";
 import multer from "multer";
 
 
@@ -36,9 +36,7 @@ router.post('/bumps/create',(req,res)=>{
          const {Brand,category,usedFor,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
 
     const bumps= new bumpsModule({
-        // name:name,
-        // nameAr:nameAr,
-        // slug:slugify(name),
+
         Brand:Brand,
         category:category,
         usedFor:usedFor,

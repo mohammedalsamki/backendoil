@@ -18,12 +18,12 @@ const bumpsSchema = new mongoose.Schema({
     StockNumber:String,
     ItemImage:String,
     MinQty:Number,
-    updatedAt:Date
+    // updatedAt:Date
 
 
 },{timestamps:true});
 
 
 
-const bumpsModule =mongoose.model('bumps',bumpsSchema);
+const bumpsModule =mongoose.model('Pumps',bumpsSchema);
 export default bumpsModule;
