@@ -15,6 +15,7 @@ import products from "./routes/products.js"
 import cart from "./routes/cart.js"
 import bumps from './routes/bumps.js'
 import bearing from './routes/bearings.js'
+import Suspention from './routes/suspention.js'
 
 
 
@@ -38,6 +39,8 @@ app.use('/api/products',products);
 app.use('/api/cart',cart);
 app.use('/api/bumps',bumps);
 app.use('/api/bearing',bearing);
+app.use('/api/Suspention',Suspention);
+
 
 app.use(express.static('uploads'));
 
