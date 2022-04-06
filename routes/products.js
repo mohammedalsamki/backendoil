@@ -55,7 +55,7 @@ router.get('/product/get/:id', function(req, res) {
       res.status(200).json(result)
   })
    });
-   router.get('/product/cat/', function(req, res) {
+   router.post('/product/cat/', function(req, res) {
     console.log(req.params.id)
     const cat = req.body.category
     ProductModule.find({category:cat})
