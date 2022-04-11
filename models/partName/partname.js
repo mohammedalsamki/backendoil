@@ -6,6 +6,7 @@ const PartNameSchema = new mongoose.Schema({
     nameAr:String,
     category:{type:mongoose.Schema.Types.ObjectId,ref:'CategoryMain'},
     ItemImage:String,
+    
 
 
 },{timestamps:true});

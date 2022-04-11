@@ -13,6 +13,14 @@ router.get('/PartName',async (req,res)=>{
         res.status(404).json({ message: error.message})
     }
 }),
+router.post('/product/cat/', function(req, res) {
+    console.log(req.params.id)
+    const cat = req.body.category
+    PartNameModule.find({category:cat})
+    .then(result=>{
+        res.status(200).json(result)
+    })
+     });
 router.delete('/PartName/:id',async (req,res)=>{
     const id = req.params.id;
  
@@ -35,20 +43,13 @@ router.get('/PartName/:id', function(req, res) {
 
 
 router.post("/PartName",async (req,res)=>{
-        const {originated,Brand,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,StockNumber,ItemImage,MinQty,OEMPartNumber}=req.body
+        const {nameEN,nameAr,category,ItemImage}=req.body
     
         let PartNameData =  new PartNameModule({
-            originated:originated,
-            Brand:Brand,
-            StockQuantity:StockQuantity,
-            UnitPrice:UnitPrice,
-            SaelsPrice:SaelsPrice,
-            Note:Note,
-            BrandPartNumber:BrandPartNumber,
-            OEMPartNumber:OEMPartNumber,
-            StockNumber:StockNumber,
+            nameEN:nameEN,
+            nameAr:nameAr,
+            category:category,
             ItemImage:ItemImage,
-            MinQty:MinQty
     
         })
         PartNameData.save()
