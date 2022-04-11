@@ -6,12 +6,12 @@ const PartNameSchema = new mongoose.Schema({
     nameAr:String,
     category:{type:mongoose.Schema.Types.ObjectId,ref:'CategoryMain'},
     ItemImage:String,
-    
+
 
 
 },{timestamps:true});
 
 
 
-const PartNameModule =mongoose.model('PartName',PartNameSchema);
+const PartNameModule =mongoose.model('PartName0',PartNameSchema);
 export default PartNameModule;

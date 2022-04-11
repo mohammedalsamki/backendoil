@@ -1,5 +1,7 @@
 import express  from "express";
 import PartNameModule from "../models/partName/partname.js";
+import mongoose from 'mongoose';
+
 
 
 const router = express.Router();
@@ -13,10 +15,37 @@ router.get('/PartName',async (req,res)=>{
         res.status(404).json({ message: error.message})
     }
 }),
+router.post('/PartName/cat/', function(req, res) {
+    const cat = JSON.stringify(req.body.category)
+    console.log(cat)
+    if(  cat==""){
+        console.log("so long")
+        res.status(401).json("try anouther ID")
+         }else if(cat.length==24){
+            PartNameModule.find({category:cat})
+            .then(result=>{
+                res.status(200).json(result)
+            })
+
+         }else{
+        res.status(401).json("try anouther ID")
+
+         }
+    }
+    
+
+
+     
+     );
+
 router.post('/product/cat/', function(req, res) {
     console.log(req.params.id)
-    const cat = req.body.category
-    PartNameModule.find({category:cat})
+
+    var query = { category: req.body.category };
+    console.log(query)
+
+    // const cat = JSON.parse(req.body.category)
+    PartNameModule.find({query})
     .then(result=>{
         res.status(200).json(result)
     })
