@@ -17,6 +17,7 @@ import bumps from './routes/bumps.js'
 import bearing from './routes/bearings.js'
 import Suspention from './routes/suspention.js'
 import Wiper from "./routes/wiper.js"
+import partName from "./routes/partName.js"
 
 
 
@@ -42,6 +43,8 @@ app.use('/api/bumps',bumps);
 app.use('/api/bearing',bearing);
 app.use('/api/Suspention',Suspention);
 app.use('/api/Wiper',Wiper);
+app.use('/api/partName',partName);
+
 
 
 

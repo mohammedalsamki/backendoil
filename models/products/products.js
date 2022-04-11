@@ -5,7 +5,7 @@ const ProductSchema = new mongoose.Schema({
 
     Brand:String,
     usedFor:String,
-    category:{type:mongoose.Schema.Types.ObjectId,ref:'CategoryMain'},
+    category:{type:mongoose.Schema.Types.ObjectId,ref:'PartName'},
     StockQuantity:Number,
     UnitPrice:Number,
     SaelsPrice:Number,
