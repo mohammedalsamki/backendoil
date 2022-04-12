@@ -3,19 +3,17 @@ import mongoose from 'mongoose';
 const ProductSchema = new mongoose.Schema({
 
 
-    Brand:String,
-    usedFor:String,
+    Brand:{type:mongoose.Schema.Types.ObjectId,ref:'Brand'},
     category:{type:mongoose.Schema.Types.ObjectId,ref:'PartName'},
-    StockQuantity:Number,
-    UnitPrice:Number,
-    SaelsPrice:Number,
     Note:String,
     BrandPartNumber:String,
     OEMPartNumber:String,
-    StockNumber:String,
     ItemImage:String,
-    MinQty:Number,
-    updatedAt:Date
+    updatedAt:Date,
+    vehicles:{
+        model:String,
+        year:[]
+    }
 
 
 },{timestamps:true});

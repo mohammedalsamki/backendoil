@@ -1,10 +1,6 @@
 import express  from "express";
-import CategoryModule from "../models/category/categoryModule.js";
 import ProductModule from "../models/products/products.js";
-import slugify from "slugify";
 import multer from "multer";
-import shortid from "shortid";
-import path from "path";
 
 const router = express.Router();
 
@@ -21,21 +17,16 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage })
 
 router.post('/product/create',(req,res)=>{
-         const {usedFor,Brand,category,StockQuantity,UnitPrice,SaelsPrice,Note,BrandPartNumber,OEMPartNumber,StockNumber,MinQty,ItemImage}=req.body;
+         const {Brand,vehicles,category,Note,BrandPartNumber,OEMPartNumber,ItemImage}=req.body;
 
     const product= new ProductModule({
-        usedFor:usedFor,
         Brand:Brand,
+        vehicles:vehicles,
         category:category,
-        StockQuantity:StockQuantity,
-        UnitPrice:UnitPrice,
-        SaelsPrice:SaelsPrice,
         Note:Note,
         BrandPartNumber:BrandPartNumber,
         OEMPartNumber:OEMPartNumber,
-        StockNumber:StockNumber,
         ItemImage:ItemImage,
-        MinQty:MinQty
     });
     product.save(((error,product)=>{
         if(error) return res.status(400).json({error});

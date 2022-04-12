@@ -4,7 +4,7 @@ const PartNameSchema = new mongoose.Schema({
 
     nameEN:String,
     nameAr:String,
-    category:{type:mongoose.Schema.Types.ObjectId,ref:'CategoryMain'},
+    category:{type:mongoose.Schema.Types.ObjectId,ref:'Category'},
     ItemImage:String,
 
 
