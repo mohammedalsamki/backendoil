@@ -174,7 +174,7 @@ router.get('/Manufacturer/get/', function(req, res) {
     });
 // ------------------------------ Delete Api ------------------------------------------------------------------
 
-router.delete('/:id',async(req,res)=>{
+router.delete('/Manufacturer/:id',async(req,res)=>{
   const id = req.params.id;
 
 try {
@@ -187,7 +187,7 @@ try {
 )
     //  -------------------Vehicles--------------
 
-router.delete('/:id',async(req,res)=>{
+router.delete('/Vehicles/:id',async(req,res)=>{
     const id = req.params.id;
   
   try {
@@ -200,7 +200,7 @@ router.delete('/:id',async(req,res)=>{
   )
     //  -------------------Modale--------------
 
-  router.delete('/:id',async(req,res)=>{
+  router.delete('/Modale/:id',async(req,res)=>{
     const id = req.params.id;
   
   try {
