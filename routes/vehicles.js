@@ -178,7 +178,7 @@ router.delete('/Manufacturer/:id',async(req,res)=>{
   const id = req.params.id;
 
 try {
-     await ManufacturerModule(id).exec();
+     await ManufacturerModule.findByIdAndRemove(id).exec();
      res.send('done')
 } catch (error) {
     console.log(error)
@@ -191,7 +191,7 @@ router.delete('/Vehicles/:id',async(req,res)=>{
     const id = req.params.id;
   
   try {
-       await VehiclesModule(id).exec();
+       await VehiclesModule.findByIdAndRemove(id).exec();
        res.send('done')
   } catch (error) {
       console.log(error)
@@ -204,7 +204,7 @@ router.delete('/Vehicles/:id',async(req,res)=>{
     const id = req.params.id;
   
   try {
-       await ModaleModule(id).exec();
+       await ModaleModule.findByIdAndRemove(id).exec();
        res.send('done')
   } catch (error) {
       console.log(error)
