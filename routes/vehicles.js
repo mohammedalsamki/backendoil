@@ -136,7 +136,7 @@ router.get('/Manufacturer/get/', function(req, res) {
 // ------------------------------ Put Api ------------------------------------------------------------------
     //  -------------------Manufacturer--------------
 
-   router.put("/:id", async (req, res) => {
+   router.put("/Manufacturer/:id", async (req, res) => {
     try {
         const product = await ManufacturerModule.findOneAndUpdate(
             { _id: req.params.id },
@@ -161,7 +161,7 @@ router.get('/Manufacturer/get/', function(req, res) {
         }
     });
     //  -------------------Modale--------------
-    router.put("/:id", async (req, res) => {
+    router.put("/Modale/:id", async (req, res) => {
         try {
             const product = await ModaleModule.findOneAndUpdate(
                 { _id: req.params.id },
