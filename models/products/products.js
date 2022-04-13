@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 
 const ProductSchema = new mongoose.Schema({
-
-
     BrandID:{type:mongoose.Schema.Types.ObjectId,ref:'Brand'},
     BrandName:String,
     category:{type:mongoose.Schema.Types.ObjectId,ref:'PartName'},
@@ -15,11 +13,7 @@ const ProductSchema = new mongoose.Schema({
         model:String,
         year:[]
     }
-
-
 },{timestamps:true});
-
-
 
 const ProductModule =mongoose.model('ProductLast',ProductSchema);
 export default ProductModule;
