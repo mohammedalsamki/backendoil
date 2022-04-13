@@ -17,10 +17,11 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage })
 
 router.post('/product/create',(req,res)=>{
-         const {Brand,vehicles,category,Note,BrandPartNumber,OEMPartNumber,ItemImage}=req.body;
+         const {BrandID,BrandName,vehicles,category,Note,BrandPartNumber,OEMPartNumber,ItemImage}=req.body;
 
     const product= new ProductModule({
-        Brand:Brand,
+        BrandID:BrandID,
+        BrandName:BrandName,
         vehicles:vehicles,
         category:category,
         Note:Note,
@@ -49,8 +50,29 @@ router.get('/product/get/:id', function(req, res) {
     ProductModule.find({category:cat})
     .then(result=>{
         res.status(200).json(result)
-    })
+    }).catch(function(error) {
+        if (error) {
+            res.status(500).json(error);
+          } else if (cat.length != 24) {
+            res.status(404).json();      // This runs.
+          }
+        });
      });
+     router.post('/product/brand/', function(req, res) {
+        const BrandName = req.body.BrandName
+        const cat = req.body.category
+
+        ProductModule.find({BrandName:BrandName,category:cat})
+        .then(result=>{
+            res.status(200).json(result)
+        }).catch(function(error) {
+            if (error) {
+                res.status(500).json(error);
+              } else if (cat.length != 24) {
+                res.status(404).json();      // This runs.
+              }
+            });
+         });
 
 router.get('/product/get/', function(req, res) {
   console.log(req.params.id)

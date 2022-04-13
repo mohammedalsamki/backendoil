@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const ProductSchema = new mongoose.Schema({
 
 
-    Brand:{type:mongoose.Schema.Types.ObjectId,ref:'Brand'},
+    BrandID:{type:mongoose.Schema.Types.ObjectId,ref:'Brand'},
+    BrandName:String,
     category:{type:mongoose.Schema.Types.ObjectId,ref:'PartName'},
     Note:String,
     BrandPartNumber:String,

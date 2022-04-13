@@ -44,7 +44,6 @@ router.get('/PartName/cat/', function(req, res) {
 
         const cat = req.body.category
         console.log(cat.length)
-        // if(cat.length ===24){}
         PartNameModule.find({category:cat})
         .then(result=>{
             res.status(200).json(result)
@@ -54,7 +53,6 @@ router.get('/PartName/cat/', function(req, res) {
               } else if (!cat) {
                 res.status(404).json();      // This runs.
               }
-              res.status(200).json(cat); // This runs as well.
             });
 
          });
