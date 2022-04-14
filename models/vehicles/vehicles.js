@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
 
 const VehiclesSchema = new mongoose.Schema({
-    ModelYear:Number,
+    ModelYear:[],
     Fueltype:String,
-    EngineSpecs:String,
+    EngVol:String,
+    BodyNo:String,
+    EngNo:String,
+    Notes:String,
     ModelImage:String,
     category:{type:mongoose.Schema.Types.ObjectId,ref:'ModaleTable'},
 },{timestamps:true});

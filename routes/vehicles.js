@@ -41,13 +41,15 @@ router.post('/Manufacturer/create',(req,res)=>{
     //  -------------------Vehicles--------------
 
 router.post('/Vehicles/create',(req,res)=>{
-    const {ModelYear,Fueltype,EngineSpecs,ModelImage,category}=req.body;
+    const {ModelYear,Fueltype,BodyNo,EngNo,Notes,ModelImage,category}=req.body;
 
 const product= new VehiclesModule({
 
     ModelYear:ModelYear,
     Fueltype:Fueltype,
-    EngineSpecs:EngineSpecs,
+    BodyNo:BodyNo,
+    EngNo:EngNo,
+    Notes:Notes,
     ModelImage:ModelImage,
     category:category
 
@@ -112,11 +114,20 @@ router.get('/Manufacturer/get/', function(req, res) {
     })
      });
   
-  router.get('/Vehicles/get/', function(req, res) {
-    VehiclesModule.find()
+  router.post('/Vehicles/get/', function(req, res) {
+    console.log(req.body.category)
+
+    const cat = req.body.category
+    VehiclesModule.find({category:cat})
     .then(result=>{
         res.status(200).json(result)
-    })
+    }).catch(function(error) {
+        if (error) {
+            res.status(500).json(error);
+          } else if (!cat) {
+            res.status(404).json();      // This runs.
+          }
+        });
      });
     //  -------------------Modale--------------
      router.get('/Modale/get/:id', function(req, res) {
@@ -127,11 +138,20 @@ router.get('/Manufacturer/get/', function(req, res) {
         })
          });
       
-      router.get('/Modale/get/', function(req, res) {
-        ModaleModule.find()
+      router.post('/Modale/get/', function(req, res) {
+        console.log(req.body.category)
+
+        const cat = req.body.category
+        ModaleModule.find({category:cat})
         .then(result=>{
             res.status(200).json(result)
-        })
+        }).catch(function(error) {
+            if (error) {
+                res.status(500).json(error);
+              } else if (!cat) {
+                res.status(404).json();      // This runs.
+              }
+            });
          });
 // ------------------------------ Put Api ------------------------------------------------------------------
     //  -------------------Manufacturer--------------
@@ -149,7 +169,7 @@ router.get('/Manufacturer/get/', function(req, res) {
 });
     //  -------------------Vehicles--------------
 
-    router.put("/:id", async (req, res) => {
+    router.put("/Vehicles/:id", async (req, res) => {
         try {
             const product = await VehiclesModule.findOneAndUpdate(
                 { _id: req.params.id },
@@ -167,7 +187,7 @@ router.get('/Manufacturer/get/', function(req, res) {
                 { _id: req.params.id },
                 req.body
             );
-            res.send(product);
+            res.send(product).json(req.body);
         } catch (error) {
             res.send(error);
         }
