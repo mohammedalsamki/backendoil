@@ -41,7 +41,7 @@ router.post('/Manufacturer/create',(req,res)=>{
     //  -------------------Vehicles--------------
 
 router.post('/Vehicles/create',(req,res)=>{
-    const {ModelYear,Fueltype,BodyNo,EngNo,Notes,ModelImage,category}=req.body;
+    const {ModelYear,Fueltype,BodyNo,EngNo,EngVol,Notes,ModelImage,category}=req.body;
 
 const product= new VehiclesModule({
 
@@ -49,6 +49,7 @@ const product= new VehiclesModule({
     Fueltype:Fueltype,
     BodyNo:BodyNo,
     EngNo:EngNo,
+    EngVol:EngVol,
     Notes:Notes,
     ModelImage:ModelImage,
     category:category
