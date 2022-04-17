@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const VehiclesSchema = new mongoose.Schema({
     ModelYear:[],
+    logo:String,
     Fueltype:String,
     EngVol:String,
     BodyNo:String,
