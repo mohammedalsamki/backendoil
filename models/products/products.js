@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema({
     OEMPartNumber:String,
     ItemImage:String,
     updatedAt:Date,
-    // vehicles:{type:mongoose.Schema.Types.ObjectId,ref:'Vehicles'}
+    vehicles:[{type:mongoose.Schema.Types.ObjectId,ref:'Vehicles'}]
 },{timestamps:true});
 
 const ProductModule =mongoose.model('ProductLast',ProductSchema);

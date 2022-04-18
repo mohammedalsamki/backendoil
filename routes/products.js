@@ -13,6 +13,40 @@ const storage = multer.diskStorage({
       cb(null, file.fieldname + '-' + uniqueSuffix)
     }
   })
+
+  router.put("/spec/:id", async (req, res) => {
+
+    var querynew = req.body.vehicles;
+    console.log("test test",querynew)
+
+    await ProductModule.findByIdAndUpdate(req.params.id,{
+
+     $addToSet:{
+      vehicles: querynew
+     }
+
+            }).then(
+                res.send("This spec has  been saved")
+        
+             ) 
+});
+router.put("/specDelete/:id", async (req, res) => {
+
+    var querynew = req.body.vehicles;
+    // var querySpec= req.body.SpecsChiled;
+    console.log("test test",querynew)
+
+    await ProductModule.findByIdAndUpdate(req.params.id,{
+
+     $pull:{
+      vehicles: querynew
+     }
+
+            }).then(
+                res.send("This spec has  been Deleted")
+        
+             ) 
+});
   
   const upload = multer({ storage: storage })
 
