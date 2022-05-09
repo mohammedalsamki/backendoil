@@ -30,6 +30,7 @@ const storage = multer.diskStorage({
         
              ) 
 });
+
 router.put("/specDelete/:id", async (req, res) => {
 
     var querynew = req.body.vehicles;
