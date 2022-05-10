@@ -3,6 +3,7 @@ import ProductModule from "../models/products/products.js";
 import multer from "multer";
 
 const router = express.Router();
+const app = express();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -36,7 +37,9 @@ const storage = multer.diskStorage({
 
    
 });
-
+router.post('/post', (req, res) => {
+  res.send('Hello World, from express');
+});
 router.post("/specDelete/", async (req, res) => {
     let ID =req.body.id;
     let querynew = req.body.vehicles;
