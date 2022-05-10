@@ -126,11 +126,8 @@ router.get('/product/get/:id', function(req, res) {
          });
 
 router.get('/product/get/', function(req, res) {
-  console.log(req.params.id)
-  ProductModule.find()
-  .then(result=>{
-      res.status(200).json(result)
-  })
+  res.send('Hello World, from express');
+
    });
 
    router.put("/:id", async (req, res) => {
