@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 
    
 });
-router.post('/post', (req, res) => {
+router.get('/post', (req, res) => {
   res.send('Hello World, from express');
 });
 router.post("/specDelete/", async (req, res) => {
