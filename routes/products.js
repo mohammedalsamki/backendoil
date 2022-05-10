@@ -37,14 +37,14 @@ const storage = multer.diskStorage({
    
 });
 
-router.post("/specDelete/:id", async (req, res) => {
-
-    var querynew = req.body.vehicles;
+router.post("/specDelete/", async (req, res) => {
+    let ID =req.body.id;
+    let querynew = req.body.vehicles;
     // var querySpec= req.body.SpecsChiled;
     console.log("test test",querynew)
 
     try {
-      await ProductModule.findByIdAndUpdate(req.params.id,{
+      await ProductModule.findByIdAndUpdate(ID,{
 
         $pull:{
          vehicles: querynew
