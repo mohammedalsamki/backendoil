@@ -109,11 +109,17 @@ router.get('/Manufacturer/get/', function(req, res) {
     //  -------------------Vehicles--------------
 
    router.get('/Vehicles/get/:id', function(req, res) {
-    console.log(req.params.id)
-    VehiclesModule.findById(req.params.id)
-    .then(result=>{
-        res.status(200).json(result)
-    })
+
+    try {
+        console.log(req.params.id)
+        VehiclesModule.findById(req.params.id)
+        .then(result=>{
+            res.status(200).json(result)
+        })   
+    } catch (error) {
+    res.send(error);
+        
+    }
      });
   
   router.post('/Vehicles/get/', function(req, res) {
