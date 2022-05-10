@@ -89,11 +89,17 @@ router.post('/product/create',(req,res)=>{
 
 });
 router.get('/product/get/:id', function(req, res) {
-  console.log(req.params.id)
-  ProductModule.findById(req.params.id)
-  .then(result=>{
-      res.status(200).json(result)
-  })
+  try {
+    console.log(req.params.id)
+    ProductModule.findById(req.params.id)
+    .then(result=>{
+        res.status(200).json(result)
+    })
+  } catch (error) {
+    res.send(error);
+    
+  }
+
    });
    router.post('/product/cat/', function(req, res) {
     console.log(req.params.id)
