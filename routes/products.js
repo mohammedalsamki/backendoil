@@ -126,7 +126,7 @@ router.get('/product/get/:id', function(req, res) {
          });
 
 router.get('/product/get/', function(req, res) {
-  res.send('Hello World, from express');
+  res.send('Hello World, from express?');
 
    });
 
