@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
    
 });
 
-router.put("/specDelete/:id", async (req, res) => {
+router.post("/specDelete/:id", async (req, res) => {
 
     var querynew = req.body.vehicles;
     // var querySpec= req.body.SpecsChiled;
@@ -51,7 +51,7 @@ router.put("/specDelete/:id", async (req, res) => {
         }
    
                }).then(
-                   res.send("This spec has  been Deleted")
+                   res.send("This spec has been Deleted")
            
                 ) 
     } catch (error) {
